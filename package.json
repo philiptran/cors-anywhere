@@ -46,7 +46,10 @@
     "test-coverage": "istanbul cover ./node_modules/.bin/_mocha -- test/test.js test/test-ratelimit.js --reporter spec",
     "start": "node server.js",
     "docker:build": "sudo docker build -t cors-proxy .",
-    "docker:run": "sudo docker run --env-file ~/.env --detach -p 8080:8080 --name=cors-proxy cors-proxy"
+    "docker:run": "sudo docker run --env-file ~/.env --detach -p 8080:8080 --name=cors-proxy cors-proxy",
+    "docker:stop": "sudo docker stop cors-proxy",
+    "docker:rm": "sudo docker rm cors-proxy",
+    "docker:logs": "sudo docker logs cors-proxy"
   },
   "engines": {
     "node": ">=10"
