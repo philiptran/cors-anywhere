@@ -28,6 +28,7 @@
     "server.js"
   ],
   "dependencies": {
+    "env-cmd": "^10.1.0",
     "http-proxy": "1.18.0",
     "proxy-from-env": "0.0.1"
   },
@@ -44,7 +45,7 @@
     "lint": "eslint .",
     "test": "mocha ./test/test*.js --reporter spec",
     "test-coverage": "istanbul cover ./node_modules/.bin/_mocha -- test/test.js test/test-ratelimit.js --reporter spec",
-    "start": "node server.js",
+    "start": "env-cmd -f .env node server.js",
     "docker:build": "sudo docker build -t cors-proxy .",
     "docker:run": "sudo docker run --env-file ~/.env --detach -p 8080:8080 --name=cors-proxy cors-proxy",
     "docker:stop": "sudo docker stop cors-proxy",
