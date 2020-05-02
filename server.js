@@ -7,6 +7,7 @@ var port = process.env.PORT || 8080;
 // again. CORS Anywhere is open by design, and this blacklist is not used, except for countering
 // immediate abuse (e.g. denial of service). If you want to block all origins except for some,
 // use originWhitelist instead.
+var requiredHeaders = parseEnvList(process.env.CORS_REQUIRED_HEADERS);
 var originBlacklist = parseEnvList(process.env.CORS_BLACKLIST);
 var originWhitelist = parseEnvList(process.env.CORS_WHITELIST);
 var targetWhitelist = parseEnvList(process.env.CORS_TARGET_WHITELIST);
@@ -36,7 +37,7 @@ cors_proxy.createServer({
     issuer: jwtIssuer,
     audience: jwtAudience,
   },
-  requireHeader: ['origin', 'x-requested-with'],
+  requireHeader: requiredHeaders,
   checkRateLimit: checkRateLimit,
   removeHeaders: [
     'cookie',
