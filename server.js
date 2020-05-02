@@ -10,6 +10,11 @@ var port = process.env.PORT || 8080;
 var originBlacklist = parseEnvList(process.env.CORS_BLACKLIST);
 var originWhitelist = parseEnvList(process.env.CORS_WHITELIST);
 var targetWhitelist = parseEnvList(process.env.CORS_TARGET_WHITELIST);
+var jwtJwksUri = process.env.CORS_JWT_JWKSURI;
+var jwtIssuer = process.env.CORS_JWT_ISSUER;
+var jwtAudience = process.env.CORS_JWT_AUDIENCE;
+var jwtCheck = process.env.CORS_JWT_CHECK === 'true';
+
 function parseEnvList(env) {
   if (!env) {
     return [];
@@ -25,7 +30,13 @@ cors_proxy.createServer({
   originBlacklist: originBlacklist,
   originWhitelist: originWhitelist,
   targetWhitelist: targetWhitelist,
-  requireHeader: ['origin', 'x-requested-with', 'authorization'],
+  jwtConfig: {
+    jwtCheck: jwtCheck,
+    jwksUri: jwtJwksUri,
+    issuer: jwtIssuer,
+    audience: jwtAudience,
+  },
+  requireHeader: ['origin', 'x-requested-with'],
   checkRateLimit: checkRateLimit,
   removeHeaders: [
     'cookie',

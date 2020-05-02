@@ -29,7 +29,9 @@
   ],
   "dependencies": {
     "env-cmd": "^10.1.0",
+    "express-jwt": "^5.3.3",
     "http-proxy": "1.18.0",
+    "jwks-rsa": "^1.8.0",
     "proxy-from-env": "0.0.1"
   },
   "devDependencies": {
